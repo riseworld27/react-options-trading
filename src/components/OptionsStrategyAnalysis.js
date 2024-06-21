@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback } from "react";
+import React, { useState, useMemo } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -63,14 +63,14 @@ const OptionsStrategyAnalysis = () => {
   const [contracts, setContracts] = useState(transformData(sampleData));
   const underlyingPrices = useMemo(() => generateUnderlyingPrices(contracts), [contracts]);
 
-  const handleInputChange = useCallback((index, event) => {
+  const handleInputChange = (index, event) => {
     const { name, value } = event.target;
     setContracts(prevContracts => {
       const newContracts = [...prevContracts];
       newContracts[index][name] = value;
       return newContracts;
     });
-  }, []);
+  };
 
   const calculateRiskRewardData = useMemo(() => {
     const data = underlyingPrices.map((price) => {
